@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:component-scan base-package="com.roger.quartz"/>
+
+    <bean id="clusterScheduleFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <!--因为集群环境下需要将任务状态持久化  这里需要为调度器指定一个数据源，
+           同时需要将quartz框架相关的几个表在你的数据库中初始化好，
+           去官网下载quartz的压缩包quartz-2.2.3-distribution.tar.gz,
+           解压之后在docs\dbTables文件下就可以找到与之相对应的sql文件
+       -->
+        <property name="dataSource" ref="druidDataSource"/>
+        <property name="configLocation" value="classpath:prop/quartz.properties" />
+        <property name="applicationContextSchedulerContextKey" value="applicationContext"/>
+        <!-- 添加任务自动启动 -->
+        <property name="autoStartup" value="true"></property>
+    </bean>
+
+</beans>

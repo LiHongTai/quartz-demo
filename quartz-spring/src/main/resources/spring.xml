@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="prop/db.properties"/>
+
+    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${datasource.druid.drvierClassName}"/>
+        <property name="url" value="${datasource.druid.url}"/>
+        <property name="username" value="${datasource.druid.userName}"/>
+        <property name="password" value="${datasource.druid.password}"/>
+        <property name="initialSize" value="${datasource.druid.initialSize}"/>
+        <property name="minIdle" value="${datasource.druid.minIdle}"/>
+        <property name="maxActive" value="${datasource.druid.maxActive}" />
+        <property name="maxWait" value="${datasource.druid.maxWait}" />
+        <property name="poolPreparedStatements" value="${datasource.druid.poolPreparedStatements}"/>
+        <property name="validationQuery" value="${datasource.druid.validationQuery}"/>
+        <property name="testOnBorrow" value="${datasource.druid.testOnBorrow}"/>
+        <property name="testWhileIdle" value="${datasource.druid.testWhileIdle}"/>
+        <property name="testOnReturn" value="${datasource.druid.testOnReturn}"/>
+        <property name="timeBetweenEvictionRunsMillis" value="${datasource.druid.timeBetweenEvictionRunsMillis}"/>
+        <property name="minEvictableIdleTimeMillis" value="${datasource.druid.minEvictableIdleTimeMillis}" />
+     </bean>
+
+    <import resource="spring-quartz2.xml" />
+
+</beans>
